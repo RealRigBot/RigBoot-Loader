@@ -1,4 +1,6 @@
-print('Loading')
+-- Farewell Infortality.
+-- Version: 2.82
+-- Instances:
 local Console = Instance.new("ScreenGui")
 local DragFrame = Instance.new("Frame")
 local CommandBox = Instance.new("TextBox")
@@ -6,3 +8,383 @@ local Message = Instance.new("TextLabel")
 local ClientTag = Instance.new("TextLabel")
 local ConsoleFrame = Instance.new("ScrollingFrame")
 local Message1 = Instance.new("TextLabel")
+--Properties:
+Console.Name = "Console"
+Console.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Console.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+DragFrame.Name = "DragFrame"
+DragFrame.Parent = Console
+DragFrame.BackgroundColor3 = Color3.new(0.0470588, 0.0470588, 0.0470588)
+DragFrame.BorderSizePixel = 0
+DragFrame.Position = UDim2.new(0.202497542, 0, 0.194277108, 0)
+DragFrame.Size = UDim2.new(0, 829, 0, 34)
+
+CommandBox.Name = "CommandBox"
+CommandBox.Parent = DragFrame
+CommandBox.BackgroundColor3 = Color3.new(0.0470588, 0.0470588, 0.0470588)
+CommandBox.BorderSizePixel = 0
+CommandBox.Position = UDim2.new(0, 0, 11.7058821, 0)
+CommandBox.Size = UDim2.new(0, 829, 0, 29)
+CommandBox.Font = Enum.Font.Code
+CommandBox.LineHeight = 3
+CommandBox.Text = " Enter Command"
+CommandBox.TextColor3 = Color3.new(1, 1, 1)
+CommandBox.TextScaled = true
+CommandBox.TextSize = 100
+CommandBox.TextWrapped = true
+CommandBox.TextXAlignment = Enum.TextXAlignment.Left
+
+Message.Name = "Message"
+Message.Parent = CommandBox
+Message.BackgroundColor3 = Color3.new(1, 1, 1)
+Message.BackgroundTransparency = 1
+Message.BorderSizePixel = 0
+Message.ClipsDescendants = true
+Message.Position = UDim2.new(0.00965018105, 0, -0.0391566269, 0)
+Message.Size = UDim2.new(1, 0, 0.100000001, 0)
+Message.Visible = false
+Message.Font = Enum.Font.Code
+Message.Text = "???"
+Message.TextColor3 = Color3.new(1, 1, 1)
+Message.TextSize = 18
+Message.TextStrokeTransparency = 0
+Message.TextXAlignment = Enum.TextXAlignment.Left
+
+ClientTag.Name = "ClientTag"
+ClientTag.Parent = DragFrame
+ClientTag.BackgroundColor3 = Color3.new(1, 1, 1)
+ClientTag.BackgroundTransparency = 1
+ClientTag.BorderSizePixel = 0
+ClientTag.ClipsDescendants = true
+ClientTag.Position = UDim2.new(0.00965018105, 0, -0.0391562954, 0)
+ClientTag.Size = UDim2.new(1, 0, 1.00875449, 0)
+ClientTag.Font = Enum.Font.Code
+ClientTag.Text = "ClientName"
+ClientTag.TextColor3 = Color3.new(1, 1, 1)
+ClientTag.TextSize = 18
+ClientTag.TextStrokeTransparency = 0
+ClientTag.TextXAlignment = Enum.TextXAlignment.Left
+
+ConsoleFrame.Name = "ConsoleFrame"
+ConsoleFrame.Parent = Console
+ConsoleFrame.BackgroundColor3 = Color3.new(0.0470588, 0.0470588, 0.0470588)
+ConsoleFrame.BorderColor3 = Color3.new(0.0470588, 0.0470588, 0.0470588)
+ConsoleFrame.BorderSizePixel = 0
+ConsoleFrame.Position = UDim2.new(0.202228978, 0, 0.244000003, 0)
+ConsoleFrame.Size = UDim2.new(0, 829, 0, 364)
+ConsoleFrame.CanvasSize = UDim2.new(0, 0, 100, 0)
+ConsoleFrame.ScrollBarThickness = 10
+
+Message1.Name = "Message1"
+Message1.Parent = ConsoleFrame
+Message1.BackgroundColor3 = Color3.new(1, 1, 1)
+Message1.BackgroundTransparency = 1
+Message1.BorderSizePixel = 0
+Message1.ClipsDescendants = true
+Message1.Position = UDim2.new(0.00965018198, 0, -0.0496931374, 0)
+Message1.Size = UDim2.new(1, 0, 0.100000001, 0)
+Message1.Font = Enum.Font.Code
+Message1.Text = "???"
+Message1.TextColor3 = Color3.new(1, 0.894118, 0.360784)
+Message1.TextSize = 18
+Message1.TextStrokeTransparency = 0
+Message1.TextXAlignment = Enum.TextXAlignment.Left
+-- Scripts:
+function SCRIPT_MUGR76_FAKESCRIPT() -- Console.DragClient 
+	local script = Instance.new('LocalScript')
+	script.Parent = Console
+	local UserInputService = game:GetService("UserInputService")
+	
+	local gui = script.Parent.DragFrame
+	
+	local dragging
+	local dragInput
+	local dragStart
+	local startPos
+	
+	local function update(input)
+		local delta = input.Position - dragStart
+		gui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+	
+	gui.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = gui.Position
+			
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	gui.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+
+end
+coroutine.resume(coroutine.create(SCRIPT_MUGR76_FAKESCRIPT))
+function SCRIPT_NJIK84_FAKESCRIPT() -- Console.MainLocal 
+	local script = Instance.new('LocalScript')
+	script.Parent = Console
+	local clientName = 'RigBoot'
+	local ver = '0.0.23'
+	local groupID = 4135148
+	
+	
+	
+	
+	
+	
+	local runningBot = false
+	local consoleTextSpacing = -0.0002
+	
+	local emptyMessage = script.Parent.DragFrame.CommandBox.Message
+	local consoleText = script.Parent.ConsoleFrame
+	local commandBox = script.Parent.DragFrame.CommandBox
+	local starterMSG = script.Parent.ConsoleFrame.Message1
+	local player = game:GetService('Players').LocalPlayer
+	local ClientTag = script.Parent.DragFrame.ClientTag
+	local messages = 1
+	local dup = 1
+	local start1
+	local Value = player:FindFirstChild('leaderstats').Value
+	
+	if player:IsInGroup(groupID) then 
+		starterMSG.Text = clientName .. ' has loaded with version ' .. ver
+		if Value ~= nil then
+			ClientTag.Text = clientName .. ' | Value: ' .. Value.Value
+		end
+	else
+		script.Parent:Destroy()
+	end
+	
+	
+	commandBox.FocusLost:connect(function(enterPressed)
+	    if enterPressed then
+	        if commandBox.Text == 'start' then
+				if runningBot then
+					local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+					if messageAfter.Text == 'The bot is already running! Type "stop" to stop the bot.' then
+						dup = dup + 1
+						messageAfter.Text = 'The bot is already running! Type "stop" to stop the bot. (x' .. dup .. ')'
+						return
+					end
+					commandBox.Text = ' Enter Command'
+					local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+					local newMessage = emptyMessage:Clone()
+					newMessage.Parent = consoleText
+					newMessage.Text = 'The bot is already running! Type "stop" to stop the bot.'
+					newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+					messages = messages + 1
+					newMessage.Name = 'Message' .. messages
+					newMessage.Visible = true
+					commandBox.Text = ' Enter Command'
+				else
+					runningBot = true
+					local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+					local newMessage = emptyMessage:Clone()
+					newMessage.Parent = consoleText
+					newMessage.Text = 'Starting...'
+					newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+					messages = messages + 1
+					newMessage.Name = 'Message' .. messages
+					newMessage.Visible = true
+					commandBox.Text = ' Enter Command'
+					wait(2)
+					local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+					local newMessage = emptyMessage:Clone()
+					newMessage.Parent = consoleText
+					newMessage.Text = 'Checking whitelist...'
+					newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+					messages = messages + 1
+					newMessage.Name = 'Message' .. messages
+					newMessage.Visible = true
+					wait(3)
+					if player:IsInGroup(groupID) then 
+						local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+						local newMessage = emptyMessage:Clone()
+						newMessage.Parent = consoleText
+						newMessage.Text = 'Grabbing player list...'
+						newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+						messages = messages + 1
+						newMessage.Name = 'Message' .. messages
+						newMessage.Visible = true
+						wait(2)
+						start1 = true
+					else
+						script.Parent:Destroy()
+					end
+				end
+			end
+			if commandBox.Text == 'stop' then
+				if runningBot then
+					runningBot = false
+					local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+					local newMessage = emptyMessage:Clone()
+					newMessage.Parent = consoleText
+					newMessage.Text = clientName .. ' has been stopped.'
+					newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+					messages = messages + 1
+					newMessage.Name = 'Message' .. messages
+					newMessage.Visible = true
+					commandBox.Text = ' Enter Command'
+				else
+					local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+					local newMessage = emptyMessage:Clone()
+					newMessage.Parent = consoleText
+					newMessage.Text = clientName .. ' is not running.'
+					newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+					messages = messages + 1
+					newMessage.Name = 'Message' .. messages
+					newMessage.Visible = true
+					commandBox.Text = ' Enter Command'
+					
+					
+					end
+			end
+			if commandBox.Text == 'version' then
+				local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+				local newMessage = emptyMessage:Clone()
+				newMessage.Parent = consoleText
+				newMessage.Text = 'You are using: ' .. clientName .. ' with version: ' .. ver
+				newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+				messages = messages + 1
+				newMessage.Name = 'Message' .. messages
+				newMessage.Visible = true
+				commandBox.Text = ' Enter Command'
+			end
+			if commandBox.Text == 'exit' then
+				local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+				local newMessage = emptyMessage:Clone()
+				newMessage.Parent = consoleText
+				newMessage.Text = 'Thanks for using ' .. clientName
+				newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+				messages = messages + 1
+				newMessage.Name = 'Message' .. messages
+				newMessage.Visible = true
+				commandBox:Destroy()
+				wait(3)
+				script.Parent:Destroy()
+			end
+		
+	    end
+	end)
+	
+	repeat wait() until start1 == true
+	start1 = false
+	local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+	local newMessage = emptyMessage:Clone()
+	newMessage.Parent = consoleText
+	newMessage.Text = 'Loading Player List..'
+	newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+	messages = messages + 1
+	newMessage.Name = 'Message' .. messages
+	newMessage.Visible = true
+	
+	
+	tablePlayers = {}
+	Players = game:GetService("Players")
+	for i, Allplayers in pairs(Players:GetPlayers()) do
+		if Allplayers.Name ~= player.Name then 
+			if Allplayers.Character then
+				if Allplayers.Name ~= 'Player' then
+					local AllplayersCheck = Allplayers:FindFirstChild('leaderstats')
+					if AllplayersCheck then
+					    print(Allplayers.Name .. ' - ' .. Allplayers.leaderstats.Value.Value)
+						local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+						local newMessage = emptyMessage:Clone()
+						newMessage.Parent = consoleText
+						newMessage.Text = Allplayers.Name .. ' - Value: ' .. Allplayers.leaderstats.Value.Value
+						newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+						messages = messages + 1
+						newMessage.Name = 'Message' .. messages
+						newMessage.Visible = true
+						table.insert(tablePlayers, Allplayers)
+						wait()
+					end
+				end
+			end
+		end
+	end
+	
+	local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+	local newMessage = emptyMessage:Clone()
+	newMessage.Parent = consoleText
+	newMessage.Text = ' '
+	newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+	messages = messages + 1
+	newMessage.Name = 'Message' .. messages
+	newMessage.Visible = true
+	
+	local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+	local newMessage = emptyMessage:Clone()
+	newMessage.Parent = consoleText
+	newMessage.Text = 'Added all players to a array list!'
+	newMessage.TextColor3 = Color3.fromRGB(43, 255, 67)
+	newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+	messages = messages + 1
+	newMessage.Name = 'Message' .. messages
+	newMessage.Visible = true
+	
+	local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+	local newMessage = emptyMessage:Clone()
+	newMessage.Parent = consoleText
+	newMessage.Text = ' '
+	newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+	messages = messages + 1
+	newMessage.Name = 'Message' .. messages
+	newMessage.Visible = true
+	
+	
+	
+	wait(math.random(1,2))
+	
+	for i, tablePlayers1 in pairs(tablePlayers) do
+		wait(math.random(0.3,2))
+		local messageAfter = consoleText:FindFirstChild('Message' .. messages)
+		local newMessage = emptyMessage:Clone()
+		newMessage.Parent = consoleText
+		newMessage.Text = 'Successfully sent a trade to ' ..tablePlayers1.Name
+		newMessage.Position = messageAfter.Position - UDim2.new(0, 0, consoleTextSpacing, 0)
+		messages = messages + 1
+		newMessage.TextColor3 = Color3.fromRGB(43, 255, 67)
+		newMessage.Name = 'Message' .. messages
+		newMessage.Visible = true
+		table.remove(tablePlayers, i)
+	end
+
+end
+coroutine.resume(coroutine.create(SCRIPT_NJIK84_FAKESCRIPT))
+function SCRIPT_LWXH81_FAKESCRIPT() -- ClientTag.ConsoleClientTag 
+	local script = Instance.new('LocalScript')
+	script.Parent = ClientTag
+	local clientName = 'RigBoot'
+	local ver = '0.0.23'
+	local groupID = 4135148
+	local player = game:GetService('Players').LocalPlayer
+	local Value = player:FindFirstChild('leaderstats').Value
+	
+	while script.Parent.Parent.Parent ~= nil do
+		wait(10)
+		if player:IsInGroup(groupID) then 
+			script.Parent.Text = clientName .. ' | Value: ' .. Value.Value
+		else
+			script.Parent:Destroy()
+		end
+	end
+
+end
+coroutine.resume(coroutine.create(SCRIPT_LWXH81_FAKESCRIPT))
